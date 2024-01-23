@@ -59,11 +59,15 @@ def salvar_arvore(classificador, nome):
 # Importando accuracy_score para avaliação do modelo
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import confusion_matrix
+from sklearn.metrics import precision_score
+from sklearn.metrics import recall_score
 
 # Função para validar a árvore de decisão
-def validar_arvore(y_pred, y_test):
-  print(accuracy_score(y_pred, y_test))
-  print(confusion_matrix(y_pred, y_test))
+def validar_arvore(y_test, y_pred):
+  print("Acuracia: " , accuracy_score(y_test, y_pred))
+  print("Matriz de Confusao: ", confusion_matrix(y_test, y_pred))
+  print("Precisao: ", precision_score(y_test, y_pred))
+  print("Recall: ", recall_score(y_test, y_pred))
 
 # Executando o divisor de dados
 x = dados.drop('Class', axis=1).values
@@ -78,4 +82,19 @@ y_pred_arvore_decisao = executar_classificador(classificador_arvore_decisao, x_t
 salvar_arvore(classificador_arvore_decisao, "arvore_decisao1.png")
 
 # Validando a árvore de decisão
-validar_arvore(y_pred_arvore_decisao, y_test)
+validar_arvore(y_test, y_pred_arvore_decisao)
+
+print(classificador_arvore_decisao)
+print(classificador_arvore_decisao.get_depth())
+
+# Execução do classificador DecisionTreeClassifier
+classificador_arvore_decisao = tree.DecisionTreeClassifier(max_depth=10, random_state=0)
+y_pred_arvore_decisao = executar_classificador(classificador_arvore_decisao, x_train, x_test, y_train)
+
+validar_arvore(y_test,y_pred_arvore_decisao)
+
+# Execução do classificador DecisionTreeClassifier
+classificador_arvore_decisao = tree.DecisionTreeClassifier(max_depth=10, random_state=0, min_samples_leaf=10)
+y_pred_arvore_decisao = executar_classificador(classificador_arvore_decisao, x_train, x_test, y_train)
+
+validar_arvore(y_test,y_pred_arvore_decisao)
