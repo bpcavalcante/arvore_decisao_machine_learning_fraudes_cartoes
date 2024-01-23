@@ -59,11 +59,15 @@ def salvar_arvore(classificador, nome):
 # Importando accuracy_score para avaliação do modelo
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import confusion_matrix
+from sklearn.metrics import precision_score
+from sklearn.metrics import recall_score
 
 # Função para validar a árvore de decisão
 def validar_arvore(y_pred, y_test):
-  print(accuracy_score(y_pred, y_test))
-  print(confusion_matrix(y_pred, y_test))
+  print("Acuracia: " , accuracy_score(y_pred, y_test))
+  print("Matriz de Confusao: ", confusion_matrix(y_pred, y_test))
+  print("Precisao: ", precision_score(y_pred, y_test))
+  print("Recall: ", recall_score(y_pred,y_test))
 
 # Executando o divisor de dados
 x = dados.drop('Class', axis=1).values
