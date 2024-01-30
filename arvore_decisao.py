@@ -98,3 +98,27 @@ classificador_arvore_decisao = tree.DecisionTreeClassifier(max_depth=10, random_
 y_pred_arvore_decisao = executar_classificador(classificador_arvore_decisao, x_train, x_test, y_train)
 
 validar_arvore(y_test,y_pred_arvore_decisao)
+
+# Utilizando RandomForest 
+
+%%time
+from sklearn.ensemble import RandomForestClassifier
+
+classificador_random_forest = RandomForestClassifier(n_estimators=100)
+y_pred_randon_forest = executar_classificador(classificador_random_forest, x_train, x_test, y_train)
+
+salvar_arvore(classificador_random_forest.estimators_[0], "random_forest1")
+salvar_arvore(classificador_random_forest.estimators_[1], "random_forest2")
+
+validar_arvore(y_test, y_pred_randon_forest)
+
+# Utilizando algoritmo AdaBoost
+%%time
+from sklearn.ensemble import AdaBoostClassifier
+
+classificador_adaboost = AdaBoostClassifier(randon_state=0)
+y_pred_adaboost = executar_classificador(classificador_adaboost, x_train, x_test, y_train)
+
+salvar_arvore(classificador_adaboost.estimators_[0], "adaboost1")
+salvar_arvore(classificador_adaboost.estimators_[1], "adaboost2")
+validar_arvore(y_test, y_pred_adaboost)
